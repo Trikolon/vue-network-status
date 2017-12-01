@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <h1>Network Status</h1>
+    <p>These metrics are reported by your browser and therefore might be inaccurate.</p>
+    <p>Data is updated automatically.</p>
     <NetworkStatus/>
   </div>
 </template>
@@ -18,11 +20,9 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+  font-family: 'Roboto', sans-serif;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  margin: 5em;
 }
 </style>

@@ -1,18 +1,17 @@
 <template>
-  <div>
-    <h1>Network status</h1>
     <div id="infobox">
-      <div v-for="metric in status">
-        <div v-if="metric.value"><label>{{metric.name}}</label> {{metric.value}} {{metric.unit}}</div>
+      <div v-for="metric in status" v-if="metric.value">
+        <div>
+        <label>{{metric.name}}</label><div> {{metric.value}} {{metric.unit}}</div>
+        </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
   const log = console;
   export default {
-    name: 'HelloWorld',
+    name: 'VueNetworkStatus',
     data() {
       return {
         status: {
@@ -25,7 +24,7 @@
             value: undefined,
           },
           rtt: {
-            name: 'Round Trip Time (RTT)',
+            name: 'Round Trip Time',
             unit: 'ms',
             value: undefined,
           },
@@ -91,10 +90,17 @@
     display: flex;
     align-content: center;
     align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   #infobox > * {
-    margin: 5px;
+    margin: 15px;
+  }
+
+  /* Values */
+  #infobox.div.div {
+    display: block;
   }
 
   label {
