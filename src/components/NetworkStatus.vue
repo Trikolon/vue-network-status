@@ -98,11 +98,6 @@
     margin: 15px;
   }
 
-  /* Values */
-  #infobox.div.div {
-    display: block;
-  }
-
   label {
     font-weight: bold;
   }
