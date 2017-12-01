@@ -1,5 +1,6 @@
 <template>
     <div id="infobox">
+      <div id="notSupported" v-if="!supported">Browser not supported</div>
       <div v-for="metric in status" v-if="metric.value">
         <div>
         <label>{{metric.name}}</label><div> {{metric.value}} {{metric.unit}}</div>
@@ -14,6 +15,7 @@
     name: 'VueNetworkStatus',
     data() {
       return {
+        supported: true,
         status: {
           type: {
             name: 'Type',
@@ -44,11 +46,12 @@
     mounted() {
       if (!navigator.connection) {
         log.error('Network API not supported');
+        this.supported = false;
       } else {
-        log.debug('Network API supported, mounting...');
+        log.info('Network API supported');
+        navigator.connection.addEventListener('change', this.networkInfoHandler);
+        this.networkInfoHandler();
       }
-      navigator.connection.addEventListener('change', this.networkInfoHandler);
-      this.networkInfoHandler();
     },
     methods: {
       networkInfoHandler() {
@@ -96,6 +99,11 @@
 
   #infobox > * {
     margin: 15px;
+  }
+
+  #notSupported {
+    font-weight: bold;
+    color: red;
   }
 
   label {

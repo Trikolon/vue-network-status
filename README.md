@@ -2,6 +2,10 @@
 
 > Network status indicator VueJS component
 
+Basic prototype (WIP).
+
+Uses the Google Chrome [Network Information API](https://googlechrome.github.io/samples/network-information/)
+
 ## Build Setup
 
 ``` bash
