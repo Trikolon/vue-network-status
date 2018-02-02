@@ -1,7 +1,7 @@
 <template>
     <div id="infobox">
       <div id="notSupported" v-if="!supported">Browser not supported</div>
-      <div v-for="metric in status" v-if="metric.value">
+      <div v-for="metric in status" v-if="metric.value != null">
         <div>
         <label>{{metric.name}}</label><div> {{metric.value}} {{metric.unit}}</div>
         </div>
