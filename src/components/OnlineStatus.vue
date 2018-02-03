@@ -1,6 +1,6 @@
 <template>
-    <div v-if='isVisible()'>
-      <!-- TODO: tooltip -->
+    <div v-if='isVisible()' class="tooltip">
+      <span class="tooltiptext">{{status ? tooltipOnline : tooltipOffline}}</span>
       <i class="material-icons">{{status ? this.onlineIcon : this.offlineIcon}}</i>
     </div>
 </template>
@@ -16,8 +16,11 @@
       offlineIcon: {
         default: 'cloud_off',
       },
-      tooltip: {
-        default: 'Network Status',
+      tooltipOnline: {
+        default: 'Online',
+      },
+      tooltipOffline: {
+        default: 'Offline',
       },
     },
     data() {
@@ -50,6 +53,8 @@
   };
 </script>
 <style scoped>
+
+  /* Material icons  */
   @font-face {
     font-family: 'Material Icons';
     font-style: normal;
@@ -84,5 +89,44 @@
 
     /* Support for IE. */
     font-feature-settings: 'liga';
+  }
+
+  /* Tooltip */
+
+  .tooltip {
+    position: relative;
+    display: inline-block;
+  }
+
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border: 5px solid transparent;
+    border-top-color: #555;
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
   }
 </style>

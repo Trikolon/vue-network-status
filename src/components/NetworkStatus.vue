@@ -1,6 +1,7 @@
 <template>
   <div>
-  <online-status v-show="displayMode === 'onlineStatus'" v-on:status-change="onlineStateHandler"/>
+  <online-status tooltip-offline="Offline, check your internet connection."
+                 v-show="displayMode === 'onlineStatus'" v-on:status-change="onlineStateHandler"/>
   <div v-if="displayMode === 'metrics'" id="infobox">
     <div id="notSupported" v-if="!supported">Browser not supported</div>
     <div v-for="metric in status" v-if="metric.value != null">
