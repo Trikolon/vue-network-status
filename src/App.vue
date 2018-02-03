@@ -8,7 +8,14 @@
         Google Chrome on Android
       </a> for the best results.</p>
     <p>Data is updated automatically.</p>
-    <NetworkStatus/>
+
+    <h2>Display style</h2>
+    <button :disabled="displayMode === 'metrics'" type="button" v-on:click="displayMode = 'metrics'">Metrics</button>
+    <button :disabled="displayMode === 'onlineStatus'" type="button" v-on:click="displayMode = 'onlineStatus'">Online Status</button>
+
+    <div id="networkStatus">
+      <NetworkStatus :display-mode="displayMode"/>
+    </div>
   </div>
 </template>
 
@@ -17,6 +24,11 @@
 
   export default {
     name: 'app',
+    data() {
+      return {
+        displayMode: 'metrics',
+      };
+    },
     components: {
       NetworkStatus,
     },
@@ -29,5 +41,8 @@
     font-family: 'Roboto', sans-serif;
     text-align: center;
     margin: 5em;
+  }
+  #networkStatus {
+    margin: 20px;
   }
 </style>

@@ -1,22 +1,43 @@
 <template>
-    <div id="infobox">
-      <div id="notSupported" v-if="!supported">Browser not supported</div>
-      <div v-for="metric in status" v-if="metric.value != null">
-        <div>
-        <label>{{metric.name}}</label><div> {{metric.value}} {{metric.unit}}</div>
-        </div>
+  <div>
+  <online-status v-show="displayMode === 'onlineStatus'" v-on:status-change="onlineStateHandler"/>
+  <div v-if="displayMode === 'metrics'" id="infobox">
+    <div id="notSupported" v-if="!supported">Browser not supported</div>
+    <div v-for="metric in status" v-if="metric.value != null">
+      <div>
+        <label>{{metric.name}}</label>
+        <div> {{metric.value}} {{metric.unit}}</div>
       </div>
     </div>
+  </div>
+  </div>
 </template>
 
 <script>
+  import OnlineStatus from './OnlineStatus';
+
   const log = console;
   export default {
     name: 'VueNetworkStatus',
+    components: {
+      OnlineStatus,
+    },
+    props: {
+      displayMode: {
+        default: 'onlineStatus',
+        validator(value) {
+          return value === 'onlineStatus' || value === 'metrics';
+        },
+      },
+    },
     data() {
       return {
         supported: true,
         status: {
+          online: {
+            name: 'Online',
+            value: true,
+          },
           type: {
             name: 'Type',
             value: undefined,
@@ -45,7 +66,9 @@
     },
     mounted() {
       if (!navigator.connection) {
-        log.error('Network API not supported');
+        const errorMsg = 'Network API not supported';
+        log.error(errorMsg);
+        this.$emit('error', errorMsg);
         this.supported = false;
       } else {
         log.info('Network API supported');
@@ -82,6 +105,9 @@
         this.status.rtt.value = c.rtt;
         this.status.downlinkMax.value = c.downlinkMax;
         this.status.effectiveType.value = c.effectiveType;
+      },
+      onlineStateHandler(state) {
+        this.status.online.value = state;
       },
     },
   };
