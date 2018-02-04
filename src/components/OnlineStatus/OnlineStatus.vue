@@ -1,8 +1,7 @@
 <template>
     <div v-if='isVisible()' v-bind:class="{tooltip: true, themedark: theme === 'dark'}">
-      <span class="tooltiptext">
-        {{status ? tooltipOnline : tooltipOffline}}</span>
-      <img :src="status ? this.onlineIcon : this.offlineIcon">
+      <span v-if="tooltip" class="tooltiptext">{{tooltip}}</span>
+      <img :src="icon">
     </div>
 </template>
 
@@ -10,7 +9,6 @@
   import cloudOn from './icons/ic_cloud_queue_black_24px.svg';
   import cloudOff from './icons/ic_cloud_off_black_24px.svg';
 
-  const log = console;
   export default {
     name: 'OnlineStatus',
     props: {
@@ -33,17 +31,20 @@
         default: 'Offline',
       },
     },
+    computed: {
+      icon() {
+        return this.status ? this.onlineIcon : this.offlineIcon;
+      },
+      tooltip() {
+        return this.status ? this.tooltipOnline : this.tooltipOffline;
+      },
+    },
     data() {
       return {
         status: navigator.onLine,
       };
     },
-    beforeDestroy() {
-      log.debug('OnlineStatus DESTROY', this);
-    },
     mounted() {
-      log.debug('OnlineStatus MOUNTED', this);
-
       window.addEventListener('online', () => this.statusHandler(true));
       window.addEventListener('offline', () => this.statusHandler(false));
     },
