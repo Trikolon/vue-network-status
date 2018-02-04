@@ -1,6 +1,6 @@
 <template>
   <div>
-  <online-status tooltip-offline="Offline, check your internet connection."
+  <online-status theme="bright" tooltip-offline="Offline, check your internet connection."
                  v-show="displayMode === 'onlineStatus'" v-on:status-change="onlineStateHandler"/>
   <div v-if="displayMode === 'metrics'" id="infobox">
     <div id="notSupported" v-if="!supported">Browser not supported</div>
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import OnlineStatus from './OnlineStatus';
+  import OnlineStatus from './OnlineStatus/OnlineStatus';
 
   const log = console;
   export default {
