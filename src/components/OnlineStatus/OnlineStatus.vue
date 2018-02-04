@@ -1,20 +1,30 @@
 <template>
-    <div v-if='isVisible()' class="tooltip">
-      <span class="tooltiptext">{{status ? tooltipOnline : tooltipOffline}}</span>
-      <i class="material-icons">{{status ? this.onlineIcon : this.offlineIcon}}</i>
+    <div v-if='isVisible()' v-bind:class="{tooltip: true, themedark: theme === 'dark'}">
+      <span class="tooltiptext">
+        {{status ? tooltipOnline : tooltipOffline}}</span>
+      <img :src="status ? this.onlineIcon : this.offlineIcon">
     </div>
 </template>
 
 <script>
+  import cloudOn from './icons/ic_cloud_queue_black_24px.svg';
+  import cloudOff from './icons/ic_cloud_off_black_24px.svg';
+
   const log = console;
   export default {
     name: 'OnlineStatus',
     props: {
+      theme: {
+        default: 'bright',
+        validator(value) {
+          return value === 'bright' || value === 'dark';
+        },
+      },
       onlineIcon: {
-        default: 'cloud_queue',
+        default: cloudOn,
       },
       offlineIcon: {
-        default: 'cloud_off',
+        default: cloudOff,
       },
       tooltipOnline: {
         default: 'Online',
@@ -53,44 +63,6 @@
   };
 </script>
 <style scoped>
-
-  /* Material icons  */
-  @font-face {
-    font-family: 'Material Icons';
-    font-style: normal;
-    font-weight: 400;
-    src: url(~material-design-icons/iconfont/MaterialIcons-Regular.eot); /* For IE6-8 */
-    src: local('Material Icons'),
-    local('MaterialIcons-Regular'),
-    url(~material-design-icons/iconfont/MaterialIcons-Regular.woff2) format('woff2'),
-    url(~material-design-icons/iconfont/MaterialIcons-Regular.woff) format('woff'),
-    url(~material-design-icons/iconfont/MaterialIcons-Regular.ttf) format('truetype');
-  }
-  .material-icons {
-    font-family: 'Material Icons';
-    font-weight: normal;
-    font-style: normal;
-    font-size: 24px;  /* Preferred icon size */
-    display: inline-block;
-    line-height: 1;
-    text-transform: none;
-    letter-spacing: normal;
-    word-wrap: normal;
-    white-space: nowrap;
-    direction: ltr;
-
-    /* Support for all WebKit browsers. */
-    -webkit-font-smoothing: antialiased;
-    /* Support for Safari and Chrome. */
-    text-rendering: optimizeLegibility;
-
-    /* Support for Firefox. */
-    -moz-osx-font-smoothing: grayscale;
-
-    /* Support for IE. */
-    font-feature-settings: 'liga';
-  }
-
   /* Tooltip */
 
   .tooltip {
@@ -128,5 +100,9 @@
   .tooltip:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
+  }
+
+  .themedark {
+    filter: invert(100%);
   }
 </style>
