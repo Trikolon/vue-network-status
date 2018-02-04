@@ -1,7 +1,7 @@
 <template>
     <div v-if='isVisible()' v-bind:class="{tooltip: true, themedark: theme === 'dark'}">
       <span v-if="tooltip" class="tooltiptext">{{tooltip}}</span>
-      <img :src="icon">
+      <img id="icon" :src="icon">
     </div>
 </template>
 
@@ -64,6 +64,11 @@
   };
 </script>
 <style scoped>
+
+  #icon {
+    width: 100%;
+  }
+
   /* Tooltip */
 
   .tooltip {
