@@ -1,8 +1,6 @@
 <template>
   <div>
-  <online-status theme="bright" tooltip-offline="Offline, check your internet connection."
-                 v-show="displayMode === 'onlineStatus'" v-on:status-change="onlineStateHandler"/>
-  <div v-if="displayMode === 'metrics'" id="infobox">
+  <div id="infobox">
     <div id="notSupported" v-if="!supported">Browser not supported</div>
     <div v-for="metric in status" v-if="metric.value != null">
       <div>
@@ -19,26 +17,14 @@
 
   const log = console;
   export default {
-    name: 'VueNetworkStatus',
+    name: 'NetworkInfo',
     components: {
       OnlineStatus,
-    },
-    props: {
-      displayMode: {
-        default: 'onlineStatus',
-        validator(value) {
-          return value === 'onlineStatus' || value === 'metrics';
-        },
-      },
     },
     data() {
       return {
         supported: true,
         status: {
-          online: {
-            name: 'Online',
-            value: true,
-          },
           type: {
             name: 'Type',
             value: undefined,
@@ -106,9 +92,6 @@
         this.status.rtt.value = c.rtt;
         this.status.downlinkMax.value = c.downlinkMax;
         this.status.effectiveType.value = c.effectiveType;
-      },
-      onlineStateHandler(state) {
-        this.status.online.value = state;
       },
     },
   };

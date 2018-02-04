@@ -9,28 +9,22 @@
       </a> for the best results.</p>
     <p>Data is updated automatically.</p>
 
-    <h2>Display style</h2>
-    <button :disabled="displayMode === 'metrics'" type="button" v-on:click="displayMode = 'metrics'">Metrics</button>
-    <button :disabled="displayMode === 'onlineStatus'" type="button" v-on:click="displayMode = 'onlineStatus'">Online Status</button>
-
     <div id="networkStatus">
-      <NetworkStatus :display-mode="displayMode"/>
+      <OnlineStatus />
+      <NetworkInfo/>
     </div>
   </div>
 </template>
 
 <script>
-  import NetworkStatus from './components/NetworkStatus';
+  import NetworkInfo from './components/NetworkInfo';
+  import OnlineStatus from './components/OnlineStatus/OnlineStatus';
 
   export default {
     name: 'app',
-    data() {
-      return {
-        displayMode: 'metrics',
-      };
-    },
     components: {
-      NetworkStatus,
+      NetworkInfo,
+      OnlineStatus,
     },
   };
 </script>
