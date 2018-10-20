@@ -1,28 +1,42 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Network Status</h1>
+    <p>
+      These metrics are reported by your browser and therefore might be inaccurate.
+      Try
+      <a href="https://play.google.com/store/apps/details?id=com.android.chrome" rel="noopener" target="_blank">
+        Google Chrome on Android
+      </a> for the best results.</p>
+    <p>Data is updated automatically.</p>
+
+    <div id="networkStatus">
+      <OnlineStatus />
+      <NetworkInfo/>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import NetworkInfo from './components/NetworkInfo.vue';
+import OnlineStatus from './components/OnlineStatus/OnlineStatus.vue';
 
 export default {
   name: 'app',
   components: {
-    HelloWorld,
+    NetworkInfo,
+    OnlineStatus,
   },
 };
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  #app {
+  @import url('https://fonts.googleapis.com/css?family=Roboto');
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    margin: 5em;
+  }
+  #networkStatus {
+    margin: 20px;
+  }
 </style>
