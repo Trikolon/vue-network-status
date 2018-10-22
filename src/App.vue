@@ -18,7 +18,7 @@
 
 <script>
 import NetworkInfo from './components/NetworkInfo.vue';
-import OnlineStatus from './components/OnlineStatus/OnlineStatus.vue';
+import OnlineStatus from './components/OnlineStatus.vue';
 
 export default {
   name: 'app',

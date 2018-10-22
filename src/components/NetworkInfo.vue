@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import OnlineStatus from './OnlineStatus/OnlineStatus.vue';
+import OnlineStatus from './OnlineStatus.vue';
 
 const log = console;
 export default {

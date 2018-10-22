@@ -2,7 +2,10 @@
   "name": "vue-network-status",
   "version": "0.1.0",
   "private": true,
+  "main": "dist/VueNetworkStatus.common.js",
+  "module": "src/index.js",
   "scripts": {
+    "dist": "vue-cli-service build --target lib --name VueNetworkStatus ./src/index.js --prod",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
