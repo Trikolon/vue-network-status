@@ -1,6 +1,7 @@
 {
   "name": "vue-network-status",
   "version": "0.1.0",
+  "license": "MIT",
   "main": "dist/VueNetworkStatus.common.js",
   "module": "src/index.js",
   "files": [
